@@ -2,11 +2,23 @@ import { RedisClientType } from "@node-redis/client";
 import { makeBadge } from "badge-maker";
 import fetch from "node-fetch";
 import type { RedisModules } from "redis";
-import type { badgeStyle, GuildedInviteResponse, IInviteInfo, Response, RInviteInfo, VanityInviteInfo } from "../types";
+import type {
+    badgeStyle,
+    GuildedInviteResponse,
+    IInviteInfo,
+    Response,
+    RInviteInfo,
+    VanityInviteInfo,
+} from "../types";
 import { internalError } from "../util";
 
-export const getMemberCountFromGuilded = async (inviteId: string, type: string) => {
-    const url = `https://www.guilded.gg/api/content/route/metadata?route=${encodeURIComponent(type === "vanity" ? `/${inviteId}` : `/${type}/${inviteId}`)}`;
+export const getMemberCountFromGuilded = async (
+    inviteId: string,
+    type: string,
+) => {
+    const url = `https://www.guilded.gg/api/content/route/metadata?route=${encodeURIComponent(
+        type === "vanity" ? `/${inviteId}` : `/${type}/${inviteId}`,
+    )}`;
     const guildedRequest = await fetch(url);
 
     if (!guildedRequest.ok) {
@@ -18,9 +30,15 @@ export const getMemberCountFromGuilded = async (inviteId: string, type: string) 
     if (!data.metadata) return null;
 
     let returnData;
-    if (type === "vanity") returnData = (data.metadata as VanityInviteInfo)?.team?.measurements?.numMembers;
-    else if (type === "i") returnData = (data.metadata as IInviteInfo)?.inviteInfo?.team?.measurements?.numMembers;
-    else if (type === "r") returnData = (data.metadata as RInviteInfo)?.recruitingInfo?.team?.measurements?.numMembers;
+    if (type === "vanity")
+        returnData = (data.metadata as VanityInviteInfo)?.team?.measurements
+            ?.numMembers;
+    else if (type === "i")
+        returnData = (data.metadata as IInviteInfo)?.inviteInfo?.team
+            ?.measurements?.numMembers;
+    else if (type === "r")
+        returnData = (data.metadata as RInviteInfo)?.recruitingInfo?.team
+            ?.measurements?.numMembers;
     return returnData;
 };
 

@@ -4,7 +4,11 @@ import { getServerShield } from "./routes/shields";
 import type { Server, IncomingMessage, ServerResponse } from "http";
 import { createClient, RedisClientType, RedisModules } from "redis";
 import { BadgeGetReq } from "./types";
-const server: FastifyInstance = fastify<Server, IncomingMessage, ServerResponse>();
+const server: FastifyInstance = fastify<
+    Server,
+    IncomingMessage,
+    ServerResponse
+>();
 const redis = createClient({
     url: process.env.REDIS_URL ?? undefined,
 }) as RedisClientType<RedisModules>;
@@ -15,7 +19,9 @@ server.register(require("fastify-rate-limit"), {
     timeWindow: "1 minute",
 });
 
-server.get("/shields/:type/:inviteId", (req: BadgeGetReq, res) => getServerShield(redis, req, res).catch(console.error));
+server.get("/shields/:type/:inviteId", (req: BadgeGetReq, res) =>
+    getServerShield(redis, req, res).catch(console.error),
+);
 
 server.all("*", {}, (_req, res) => {
     res.status(404).send({

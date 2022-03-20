@@ -3,17 +3,37 @@ import { badRequest } from "../util";
 import { RedisClientType, RedisModules } from "@node-redis/client";
 import { generateSvg, getMemberCountFromGuilded } from "../controllers/shield";
 
-export const getServerShield = async (redis: RedisClientType<RedisModules>, req: BadgeGetReq, res: Response) => {
+export const getServerShield = async (
+    redis: RedisClientType<RedisModules>,
+    req: BadgeGetReq,
+    res: Response,
+) => {
     const { inviteId, type } = req.params;
-    if (!type || !inviteId) return badRequest(res, "Missing invite type or invite ID");
-    if (!["i", "r", "vanity"].includes(type)) return badRequest(res, `Invalid type, must be either 'r', 'i', or 'vanity'. Received ${type}`);
+    if (!type || !inviteId)
+        return badRequest(res, "Missing invite type or invite ID");
+    if (!["i", "r", "vanity"].includes(type))
+        return badRequest(
+            res,
+            `Invalid type, must be either 'r', 'i', or 'vanity'. Received ${type}`,
+        );
     const color = req.query.color ?? "black";
     const receivedStyle = req.query.style;
     if (receivedStyle) {
-        if (!["plastic", "flat", "flat-square", "for-the-badge", "social"].includes(receivedStyle)) return badRequest(res, "Invalid style.");
+        if (
+            ![
+                "plastic",
+                "flat",
+                "flat-square",
+                "for-the-badge",
+                "social",
+            ].includes(receivedStyle)
+        )
+            return badRequest(res, "Invalid style.");
     }
 
-    const cachedBadge = await redis.get(`badge:${type}:${inviteId}:${color}:${receivedStyle}`);
+    const cachedBadge = await redis.get(
+        `badge:${type}:${inviteId}:${color}:${receivedStyle}`,
+    );
     if (cachedBadge) {
         res.header("Content-Type", "image/svg+xml");
         return res.status(200).send(cachedBadge);
