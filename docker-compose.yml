@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+    cache:
+        image: "redis:alpine"
+        restart: unless-stopped
+        ports:
+            - "6379:6379"
+    api:
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        container_name: guilded-shield-api
+        restart: unless-stopped
+        depends_on:
+            - cache
+        env_file:
+            - ./.env
+        ports:
+            - "${PORT:-80}:${PORT:-80}"
