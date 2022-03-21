@@ -1,5 +1,5 @@
 <div align="center">
-<h1>guilded-shield</h1>
+<h1>guilded-shields</h1>
 <p>Generate SVG badges for your Guilded server</p>
 <p>
     <a><img src="https://guilded.nico.engineer/shields/i/pB1KPnek?style=flat" alt="Guilded Server"></a>
@@ -17,7 +17,7 @@
 |    color    |    ✔️    | The color you'd like the message field to be (where it says XX members). <br>Must be a color from [here](https://github.com/zaida04/guilded-shields/blob/main/src/colors.ts#L6) or [here](https://shields.io/) |
 |    style    |    ✔️    |                                                      Style you'd like the button to be in (`plastic`, `flat`, `flat-square`, `for-the-badge` or `social`)                                                      |
 
-This route will return an SVG containing the amount of members in your Guilded server. Results are cached for 15 minutes.
+This route will return an SVG badge containing the amount of members in your Guilded server. Results are cached for 15 minutes.
 
 What your invite type should be is dependent on what kind of invite link you have. If you have one that follows the `/i/:code` schema, you should be appending that same thing after `/shields`. **If you are using a vanity invite link, you must append use `/vanity/:code` instead of providing no invite type.** Examples below:
 

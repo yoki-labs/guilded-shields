@@ -62,7 +62,7 @@ export const generateSvg = async (
     try {
         const svg = makeBadge({
             color,
-            labelColor: "yellow",
+            labelColor: "#F5C400",
             style: (style as badgeStyle) ?? "plastic",
             label: "Guilded",
             message: `${msg} members`,
