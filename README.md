@@ -8,6 +8,23 @@
 </p>
 </div>
 
+## Usage
+
+### `GET /badges/:inviteType/:inviteId`
+
+| Query Param | Optional |                                                                                                  description                                                                                                   |
+| :---------: | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|    color    |    ✔️    | The color you'd like the message field to be (where it says XX members). <br>Must be a color from [here](https://github.com/zaida04/guilded-shields/blob/main/src/colors.ts#L6) or [here](https://shields.io/) |
+|    style    |    ✔️    |                                                      Style you'd like the button to be in (`plastic`, `flat`, `flat-square`, `for-the-badge` or `social`)                                                      |
+
+This route will return an SVG containing the amount of members in your Guilded server. Results are cached for 15 minutes.
+
+What your invite type should be is dependent on what kind of invite link you have. If you have one that follows the `/i/:code` schema, you should be appending that same thing after `/shields`. **If you are using a vanity invite link, you must append use `/vanity/:code` instead of providing no invite type.** Examples below:
+
+`https://www.guilded.gg/i/ENZog7nE` ➜ `https://guilded.nico.engineer/shields/i/ENZog7nE`
+`https://www.guilded.gg/r/zzQR46qKZE` ➜ `https://guilded.nico.engineer/shields/r/zzQR46qKZE`
+`https://www.guilded.gg/guilded-api` ➜ `https://guilded.nico.engineer/shields/vanity/guilded-api`
+
 ## 📝 Installation
 
 ### Docker-Compose
@@ -27,23 +44,6 @@ npm install
 npm run build
 node dist/index.js
 ```
-
-## Usage
-
-### `GET /badges/:inviteType/:inviteId`
-
-| Query Param | Optional |                                                                                                  description                                                                                                   |
-| :---------: | :------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|    color    |    ✔️    | The color you'd like the message field to be (where it says XX members). <br>Must be a color from [here](https://github.com/zaida04/guilded-shields/blob/main/src/colors.ts#L6) or [here](https://shields.io/) |
-|    style    |    ✔️    |                                                      Style you'd like the button to be in (`plastic`, `flat`, `flat-square`, `for-the-badge` or `social`)                                                      |
-
-This route will return an SVG containing the amount of members in your Guilded server. Results are cached for 15 minutes.
-
-What your invite type should be is dependent on what kind of invite link you have. If you have one that follows the `/i/:code` schema, you should be appending that same thing after `/shields`. **If you are using a vanity invite link, you must append use `/vanity/:code` instead of providing no invite type.** Examples below:
-
-`https://www.guilded.gg/i/ENZog7nE` ➜ `https://guilded.nico.engineer/shields/i/ENZog7nE`
-`https://www.guilded.gg/r/zzQR46qKZE` ➜ `https://guilded.nico.engineer/shields/r/zzQR46qKZE`
-`https://www.guilded.gg/guilded-api` ➜ `https://guilded.nico.engineer/shields/vanity/guilded-api`
 
 ## ✋ Contributing
 
