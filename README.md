@@ -19,7 +19,7 @@
 
 This route will return an SVG badge containing the amount of members in your Guilded server. Results are cached for 15 minutes.
 
-What your invite type should be is dependent on what kind of invite link you have. If you have one that follows the `/i/:code` schema, you should be appending that same thing after `/shields`. **If you are using a vanity invite link, you must append use `/vanity/:code` instead of providing no invite type.** Examples below:
+What your invite type should be is dependent on what kind of invite link you have. If you have one that follows the `/i/:code` schema, you should be appending that same thing after `/shields`. **If you are using a vanity invite link, you must use `/vanity/:code` instead of providing no invite type.** Examples below:
 
 `https://www.guilded.gg/i/ENZog7nE` ➜ `https://shields.yoki-labs.xyz/shields/i/ENZog7nE`  
 `https://www.guilded.gg/r/zzQR46qKZE` ➜ `https://shields.yoki-labs.xyz/shields/r/zzQR46qKZE`  
