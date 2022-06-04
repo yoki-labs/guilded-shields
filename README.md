@@ -2,7 +2,7 @@
 <h1>guilded-shields</h1>
 <p>Generate SVG badges for your Guilded server</p>
 <p>
-    <a><img src="https://shields.yoki-labs.xyz/shields/i/pB1KPnek?style=flat" alt="Guilded Server"></a>
+    <a href="https://www.guilded.gg/i/2MJ57MQk"><img src="https://shields.yoki-labs.xyz/shields/i/2MJ57MQk?style=flat" alt="Guilded Server"></a>
     <img src="https://github.com/yoki-labs/guilded-shields/actions/workflows/ci.yml/badge.svg" alt="Lint and build">
     <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a><br>
 </p>
