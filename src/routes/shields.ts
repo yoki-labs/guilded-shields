@@ -1,6 +1,6 @@
 import type { BadgeGetReq, Response } from "../types";
 import { badRequest } from "../util";
-import { RedisClientType, RedisModules } from "@node-redis/client";
+import { RedisClientType, RedisModules } from "@redis/client";
 import { generateSvg, getMemberCountFromGuilded } from "../controllers/shield";
 
 export const getServerShield = async (

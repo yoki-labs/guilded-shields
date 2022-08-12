@@ -1,7 +1,6 @@
-import { RedisClientType } from "@node-redis/client";
+import { RedisClientType, RedisModules } from "@redis/client";
 import { makeBadge } from "badge-maker";
 import fetch from "node-fetch";
-import type { RedisModules } from "redis";
 import type {
     badgeStyle,
     GuildedInviteResponse,

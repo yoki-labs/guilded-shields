@@ -2,7 +2,7 @@ import "dotenv/config";
 import fastify, { FastifyInstance } from "fastify";
 import { getServerShield } from "./routes/shields";
 import type { Server, IncomingMessage, ServerResponse } from "http";
-import { createClient, RedisClientType, RedisModules } from "redis";
+import { createClient, RedisClientType, RedisModules } from "@redis/client";
 import { BadgeGetReq } from "./types";
 const server: FastifyInstance = fastify<
     Server,
