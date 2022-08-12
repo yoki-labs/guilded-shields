@@ -16,7 +16,7 @@ export const getMemberCountFromGuilded = async (
     type: string,
 ) => {
     const url = `https://www.guilded.gg/api/content/route/metadata?route=${encodeURIComponent(
-        `/${type}/${inviteId}`,
+        type === "vanity" ? `/${inviteId}` : `/${type}/${inviteId}`,
     )}`;
     const guildedRequest = await fetch(url);
 
