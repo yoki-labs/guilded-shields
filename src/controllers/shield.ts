@@ -18,6 +18,7 @@ export const getMemberCountFromGuilded = async (
     const url = `https://www.guilded.gg/api/content/route/metadata?route=${encodeURIComponent(
         type === "vanity" ? `/${inviteId}` : `/${type}/${inviteId}`,
     )}`;
+    console.log(url);
     const guildedRequest = await fetch(url);
 
     if (!guildedRequest.ok) {
@@ -34,10 +35,10 @@ export const getMemberCountFromGuilded = async (
             ?.numMembers;
     else if (type === "i")
         returnData = (data.metadata as IInviteInfo)?.inviteInfo?.team
-            ?.measurements?.numMembers;
+            ?.memberCount;
     else if (type === "r")
         returnData = (data.metadata as RInviteInfo)?.recruitingInfo?.team
-            ?.measurements?.numMembers;
+            ?.memberCount;
     return returnData;
 };
 

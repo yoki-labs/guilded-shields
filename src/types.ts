@@ -10,11 +10,15 @@ export interface GuildedInviteResponse {
 }
 
 export interface RInviteInfo {
-    recruitingInfo: VanityInviteInfo;
+    recruitingInfo: {
+        team: TeamWithoutMeasurements;
+    };
 }
 
 export interface IInviteInfo {
-    inviteInfo: { team: VanityInviteInfo["team"] };
+    inviteInfo: {
+        team: TeamWithoutMeasurements;
+    };
 }
 
 export interface VanityInviteInfo {
@@ -24,6 +28,13 @@ export interface VanityInviteInfo {
         measurements: { numMembers: number };
     };
 }
+
+export type TeamWithoutMeasurements = Omit<
+    VanityInviteInfo["team"],
+    "measurements"
+> & {
+    memberCount: number;
+};
 
 export type badgeStyle =
     | "plastic"
