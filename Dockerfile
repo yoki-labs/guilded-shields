@@ -2,9 +2,9 @@ FROM node:16-alpine
 WORKDIR /usr/app
 
 COPY package*.json nodemon.json ./
-RUN npm i
+RUN yarn install
 COPY tsconfig.json ./
 COPY src src/
-RUN npm run build
+RUN yarn build
 
 CMD [ "node", "dist/index.js" ]

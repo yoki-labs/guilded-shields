@@ -44,7 +44,7 @@ export type badgeStyle =
     | "social";
 
 // Request object extendable with a route interface like defined above, that way you have fully typed headers, body, queryparams
-export type Request<T = RequestGenericInterface> = FastifyRequest<
+export type Request<T extends RequestGenericInterface> = FastifyRequest<
     T,
     Server,
     IncomingMessage
