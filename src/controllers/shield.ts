@@ -69,7 +69,7 @@ export const generateSvg = async (
         });
         await redis.set(`badge:${type}:${inviteId}:${color}:${style}`, svg, {
             EX: 900,
-        });
+        }).catch(() => void 0);
         return svg;
     } catch (e) {
         return internalError(res, (e as Error).message);
