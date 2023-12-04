@@ -25,7 +25,8 @@ export interface VanityInviteInfo {
     team: {
         id: string;
         name: string;
-        measurements: { numMembers: number };
+        measurements?: { numMembers: number };
+        memberCount: number;
     };
 }
 
