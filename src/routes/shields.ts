@@ -31,16 +31,18 @@ export const getServerShield = async (
             return badRequest(res, "Invalid style.");
     }
 
-    const cachedBadge = await redis.get(
-        `badge:${type}:${inviteId}:${color}:${receivedStyle}`,
-    ).catch(() => null);
+    const cachedBadge = await redis
+        .get(`badge:${type}:${inviteId}:${color}:${receivedStyle}`)
+        .catch(() => null);
     if (cachedBadge) {
         res.header("Content-Type", "image/svg+xml");
         return res.status(200).send(cachedBadge);
     }
 
     let memberCount: string | null;
-    const cachedGuildedReq = await redis.get(`req:${type}:${inviteId}`).catch(() => null);
+    const cachedGuildedReq = await redis
+        .get(`req:${type}:${inviteId}`)
+        .catch(() => null);
     if (cachedGuildedReq) memberCount = cachedGuildedReq;
     else {
         const memberCountReq = await getMemberCountFromGuilded(inviteId, type);
@@ -51,7 +53,9 @@ export const getServerShield = async (
             );
 
         memberCount = memberCountReq.toString();
-        await redis.set(`req:${type}:${inviteId}`, memberCount, { EX: 900 }).catch(() => void 0);
+        await redis
+            .set(`req:${type}:${inviteId}`, memberCount, { EX: 900 })
+            .catch(() => void 0);
     }
 
     const svg = await generateSvg(redis, res, {
