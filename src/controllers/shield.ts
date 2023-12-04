@@ -31,8 +31,10 @@ export const getMemberCountFromGuilded = async (
 
     let returnData;
     if (type === "vanity")
-        returnData = (data.metadata as VanityInviteInfo)?.team?.measurements
-            ?.numMembers;
+        returnData = (
+            (data.metadata as VanityInviteInfo)?.team?.measurements?.numMembers ??
+            (data.metadata as VanityInviteInfo)?.team?.memberCount
+        );
     else if (type === "i")
         returnData = (data.metadata as IInviteInfo)?.inviteInfo?.team
             ?.memberCount;
