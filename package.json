@@ -2,40 +2,17 @@
     "name": "guilded-shields",
     "version": "1.0.0",
     "description": "SVG shields for providing metadata about Guilded Servers.",
-    "main": "dist/index.js",
     "scripts": {
-        "build": "tsc",
-        "dev": "yarn build && node dist/index.js",
-        "start:dev": "npx nodemon",
-        "format": "prettier --write **/*.{ts,js,json,yml,yaml}",
-        "lint": "npx eslint src/",
-        "lint:fix": "npx eslint src/ --fix",
-        "test": "echo \"pass through\" && exit 0"
+        "format": "prettier --write **/*.{ts,json}"
     },
     "author": "Zaid \"Nico\"",
     "license": "MIT",
     "devDependencies": {
-        "@sapphire/eslint-config": "^4.3.0",
-        "@types/node": "^15.0.2",
-        "@types/node-fetch": "^2.6.1",
-        "@typescript-eslint/eslint-plugin": "^4.16.1",
-        "@typescript-eslint/parser": "^4.16.1",
-        "eslint": "^7.21.0",
-        "eslint-config-prettier": "^8.1.0",
-        "eslint-config-typescript": "^3.0.0",
-        "eslint-plugin-prettier": "^4.0.0",
-        "nodemon": "^2.0.14",
-        "prettier": "^2.3.0",
-        "rimraf": "^3.0.2",
-        "typescript": "^4.3.2"
+        "prettier": "^3.1.1"
     },
     "dependencies": {
-        "@redis/client": "^1.2.0",
         "badge-maker": "^3.3.1",
-        "dotenv": "^8.2.0",
-        "fastify": "^3.15.1",
-        "fastify-rate-limit": "^5.5.0",
-        "node-fetch": "^2.6.7",
-        "redis": "^4.0.3"
+        "elysia": "^0.7.30",
+        "elysia-rate-limit": "^2.0.1"
     }
 }

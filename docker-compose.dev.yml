@@ -1,6 +1,0 @@
-version: "3.7"
-services:
-    api:
-        command: ["npm", "run", "start:dev"]
-        volumes:
-            - "./src:/usr/app/src"

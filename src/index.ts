@@ -1,39 +1,72 @@
-import "dotenv/config";
-import fastify, { FastifyInstance } from "fastify";
-import { getServerShield } from "./routes/shields";
-import type { Server, IncomingMessage, ServerResponse } from "http";
-import { createClient, RedisClientType, RedisModules } from "@redis/client";
-import { BadgeGetReq } from "./types";
-const server: FastifyInstance = fastify<
-    Server,
-    IncomingMessage,
-    ServerResponse
->();
-const redis = createClient({
-    url: process.env.REDIS_URL ?? undefined,
-}) as RedisClientType<RedisModules>;
+import { Elysia, t } from "elysia";
+import { rateLimit } from "elysia-rate-limit";
+import { generateSvg, getMemberCount } from "./shields";
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-server.register(require("fastify-rate-limit"), {
-    max: 100,
-    timeWindow: "1 minute",
-});
+const app = new Elysia();
+app.use(rateLimit());
 
-server.get("/shields/:type/:inviteId", (req: BadgeGetReq, res) =>
-    getServerShield(redis, req, res).catch(console.error),
+app.get(
+    "/shields/:type/:inviteId",
+    async (ctx) => {
+        const { type, inviteId } = ctx.params;
+        const { color, style } = ctx.query;
+
+        const memberCount = await getMemberCount(inviteId, type);
+        const svg = await generateSvg({
+            message: `${memberCount} members`,
+            style,
+            color: color ?? "black",
+        });
+
+        ctx.set = {
+            headers: {
+                "Content-Type": "image/svg+xml",
+            },
+        };
+        return svg;
+    },
+    {
+        query: t.Object({
+            color: t.Optional(t.String()),
+            style: t.Optional(t.String()),
+        }),
+        params: t.Object({
+            type: t.Union([
+                t.Literal("i"),
+                t.Literal("r"),
+                t.Literal("vanity"),
+            ]),
+            inviteId: t.String(),
+        }),
+    },
 );
 
-server.all("*", {}, (_req, res) => {
-    res.status(404).send({
+app.onError((ctx) => {
+    if (ctx.error.message === "NOT_FOUND") {
+        return {
+            failed: true,
+            status: "NOT_FOUND",
+            error: { message: "404: Route not found." },
+        };
+    }
+
+    if (ctx.code == "VALIDATION") {
+        return {
+            failed: true,
+            status: "INVALID_REQUEST",
+            error: {
+                message: ctx.error.message,
+            },
+        };
+    }
+
+    return {
         failed: true,
-        status: "NOT_FOUND",
-        error: { message: "404: Route not found." },
-    });
-    return void 0;
+        status: "INTERNAL_ERROR",
+        error: { message: "There was an internal error." },
+    };
 });
 
-server.listen(process.env.PORT ?? 80, "0.0.0.0", async (e) => {
-    if (e) throw e;
-    await redis.connect();
-    return console.log("Server started!");
+app.listen(7777, () => {
+    console.log("Server running!");
 });
