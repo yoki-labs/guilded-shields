@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "alwaysStrict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "noEmit": true,
+        "lib": ["esnext"],
+        "types": ["bun-types"],
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "strict": true,
+        "target": "ES2020"
+    },
+    "include": ["src/**/*.ts"]
+}

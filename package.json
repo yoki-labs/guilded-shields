@@ -1,18 +1,21 @@
 {
-    "name": "guilded-shields",
-    "version": "1.0.0",
-    "description": "SVG shields for providing metadata about Guilded Servers.",
-    "scripts": {
-        "format": "prettier --write **/*.{ts,json}"
-    },
-    "author": "Zaid \"Nico\"",
-    "license": "MIT",
-    "devDependencies": {
-        "prettier": "^3.1.1"
-    },
-    "dependencies": {
-        "badge-maker": "^3.3.1",
-        "elysia": "^0.7.30",
-        "elysia-rate-limit": "^2.0.1"
-    }
+  "name": "guilded-shields",
+  "version": "1.0.0",
+  "description": "SVG shields for providing metadata about Guilded Servers.",
+  "scripts": {
+    "typecheck": "tsc",
+    "format": "prettier --write **/*.{ts,json}"
+  },
+  "author": "Zaid \"Nico\"",
+  "license": "MIT",
+  "devDependencies": {
+    "bun-types": "^1.0.16",
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "badge-maker": "^3.3.1",
+    "elysia": "^0.7.30",
+    "elysia-rate-limit": "^2.0.1"
+  }
 }

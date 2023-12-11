@@ -3,7 +3,7 @@
 <p>Generate SVG badges for your Guilded server</p>
 <p>
     <a href="https://www.guilded.gg/i/2MJ57MQk"><img src="https://shields.yoki-labs.xyz/shields/i/2MJ57MQk?style=flat" alt="Guilded Server"></a>
-    <img src="https://github.com/yoki-labs/guilded-shields/actions/workflows/ci.yml/badge.svg" alt="Lint and build">
+    <img src="https://github.com/yoki-labs/guilded-shields/actions/workflows/ci.yml/badge.svg" alt="Build TypeScript">
     <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a><br>
 </p>
 </div>
@@ -27,22 +27,13 @@ What your invite type should be is dependent on what kind of invite link you hav
 
 ## 📝 Installation
 
-### Docker-Compose
+### Bun
 
 ```
 git clone https://github.com/yoki-labs/guilded-shields.git
 cd guilded-shields
-docker-compose up -d --build
-```
-
-### Node
-
-```
-git clone https://github.com/yoki-labs/guilded-shields.git
-cd guilded-shields
-npm install
-npm run build
-node dist/index.js
+bun install
+bun run src/index.ts
 ```
 
 ## ✋ Contributing
